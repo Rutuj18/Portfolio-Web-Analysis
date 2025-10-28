@@ -13,7 +13,7 @@ def analyze_portfolio(tickers, allocations):
     volatility = np.std(portfolio_returns) * np.sqrt(trading_days)
 
     risk_free_rate = 0.065
-    sharpe_ratio = (annual_return - risk_free_rate) / np.std(portfolio_returns)
+    sharpe_ratio = (annual_return - risk_free_rate) / volatility
 
     correlation_matrix = daily_returns.corr().round(2).to_dict()
 
