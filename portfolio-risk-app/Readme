@@ -1,0 +1,86 @@
+# Portfolio Analysis Function Explanation
+
+This document explains how the portfolio analysis function works conceptually, without showing the code. It covers the logic, financial principles, and reasoning behind each step.
+
+---
+
+## 🧠 Purpose
+
+The portfolio analysis function is designed to evaluate how a set of stocks performs together over a given period. It helps in understanding key aspects like expected returns, risk, and how well the portfolio is diversified. This is done using real market data from Yahoo Finance.
+
+---
+
+## 📦 Overview
+
+The function takes a list of stock tickers and their respective allocations (weights) in the portfolio. Using these inputs, it analyzes historical price data for each stock and computes several key performance indicators.
+
+---
+
+## 🧮 Key Steps in the Analysis
+
+### 1. **Normalizing Portfolio Weights**
+
+The first step ensures that the allocations add up to 100%. This way, the contribution of each stock to the portfolio reflects its true weight.
+
+---
+
+### 2. **Fetching Market Data**
+
+The function retrieves one year of historical closing prices for all the stocks in the portfolio. This provides the raw data needed for return calculations.
+
+---
+
+### 3. **Calculating Daily Returns**
+
+From the closing prices, the daily percentage change in price is computed. This represents the stock’s day-to-day profit or loss.
+
+---
+
+### 4. **Computing Portfolio Daily Returns**
+
+Each stock’s daily return is multiplied by its respective portfolio weight. The sum of these weighted returns gives the portfolio’s overall daily return.
+
+---
+
+### 5. **Annualized Return and Volatility**
+
+The function then estimates two key statistics:
+
+* **Annualized Return:** The average daily return scaled to a full trading year (about 250 trading days). It shows how much the portfolio would earn annually, assuming the same average daily growth.
+* **Volatility:** The standard deviation of daily returns, also scaled to a yearly figure. It reflects how much the portfolio’s returns fluctuate over time — a measure of risk.
+
+---
+
+### 6. **Sharpe Ratio**
+
+The Sharpe ratio measures how efficiently the portfolio generates returns relative to the amount of risk taken. It compares the portfolio’s return over the risk-free rate to its volatility. A higher Sharpe ratio means better risk-adjusted performance.
+
+---
+
+### 7. **Maximum Drawdown**
+
+This metric shows the worst drop the portfolio experienced from a peak to a trough. It’s useful to understand potential downside risk and how resilient the portfolio is during market declines.
+
+---
+
+### 8. **Correlation Matrix**
+
+The correlation matrix measures how each pair of stocks moves relative to each other. A high correlation means they move similarly, while a low or negative correlation indicates diversification benefits.
+
+---
+
+## 📊 Key Metrics Explained
+
+| Metric                 | Description                                             |
+| ---------------------- | ------------------------------------------------------- |
+| **Annualized Return**  | Expected yearly portfolio return based on past data     |
+| **Volatility**         | The degree of variation in returns; represents risk     |
+| **Sharpe Ratio**       | Efficiency of returns relative to risk                  |
+| **Max Drawdown**       | The largest percentage drop from a peak before recovery |
+| **Correlation Matrix** | Statistical relationship among portfolio assets         |
+
+---
+
+## 💬 Summary
+
+The portfolio analysis function provides a complete snapshot of portfolio health — showing both the potential for growth and the level of risk involved. It helps investors make informed decisions, compare portfolio options, and understand how diversification affects performance.
