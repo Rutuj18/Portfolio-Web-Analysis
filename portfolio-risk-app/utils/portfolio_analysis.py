@@ -11,7 +11,7 @@ def analyze_portfolio(tickers, allocations):
 
     annual_return = np.mean(portfolio_returns) * 250
     volatility = np.std(portfolio_returns) * np.sqrt(250)
-    risk_free_rate = 0.05
+    risk_free_rate = 0.065
     sharpe_ratio = (annual_return - risk_free_rate) / volatility
 
     cumulative_return = (1 + portfolio_returns).cumprod()
