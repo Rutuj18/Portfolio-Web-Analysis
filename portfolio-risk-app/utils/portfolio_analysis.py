@@ -15,11 +15,6 @@ def analyze_portfolio(tickers, allocations):
     risk_free_rate = 0.065
     sharpe_ratio = (annual_return - risk_free_rate) / np.std(portfolio_returns)
 
-    cumulative_return = (1 + portfolio_returns).cumprod()
-    rolling_max = cumulative_return.cummax()
-    drawdown = cumulative_return / rolling_max - 1
-    max_drawdown = drawdown.min()
-
     correlation_matrix = daily_returns.corr().round(2).to_dict()
 
     return {
