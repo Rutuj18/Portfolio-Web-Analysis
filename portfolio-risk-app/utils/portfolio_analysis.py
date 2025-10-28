@@ -13,7 +13,7 @@ def analyze_portfolio(tickers, allocations):
     volatility = np.std(portfolio_returns) * np.sqrt(trading_days)
 
     risk_free_rate = 0.065
-    sharpe_ratio = (annual_return - risk_free_rate) / volatility
+    sharpe_ratio = (annual_return - risk_free_rate) / np.std(portfolio_returns)
 
     cumulative_return = (1 + portfolio_returns).cumprod()
     rolling_max = cumulative_return.cummax()
