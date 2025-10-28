@@ -9,7 +9,7 @@ def analyze_portfolio(tickers, allocations):
 
     portfolio_returns = (daily_returns * weights).sum(axis=1)
     trading_days = len(portfolio_returns)
-    annual_return = np.mean(portfolio_returns) * trading_days
+    annual_return = (1+(np.mean(portfolio_returns))**(trading_days)))-1
     volatility = np.std(portfolio_returns) * np.sqrt(trading_days)
 
     risk_free_rate = 0.065
@@ -21,6 +21,5 @@ def analyze_portfolio(tickers, allocations):
         "annualizedReturn": round(annual_return * 100, 2),
         "volatility": round(volatility * 100, 2),
         "sharpeRatio": round(sharpe_ratio, 2),
-        "maxDrawdown": round(max_drawdown * 100, 2),
         "correlationMatrix": correlation_matrix
     }
