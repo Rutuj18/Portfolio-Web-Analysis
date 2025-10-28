@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Risk Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Portfolio Risk Analyzer</h1>
+        <form id="portfolioForm">
+            <label>Enter stock tickers (comma-separated):</label>
+            <input type="text" id="tickers" placeholder="AAPL, MSFT, GOOGL">
+            <label>Enter allocations (comma-separated %):</label>
+            <input type="text" id="allocations" placeholder="40, 30, 30">
+            <button type="submit">Analyze</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById("portfolioForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const tickers = document.getElementById("tickers").value.split(",").map(s => s.trim());
+            const allocations = document.getElementById("allocations").value.split(",").map(Number);
+            const res = await fetch("/api/analyze", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ tickers, allocations })
+            });
+            const data = await res.json();
+            document.getElementById("result").innerHTML = `
+                <h3>Results</h3>
+                <p><b>Annualized Return:</b> ${data.annualizedReturn}%</p>
+                <p><b>Volatility:</b> ${data.volatility}%</p>
+                <p><b>Sharpe Ratio:</b> ${data.sharpeRatio}</p>
+                <p><b>Max Drawdown:</b> ${data.maxDrawdown}%</p>
+                <p><b>Correlation Matrix:</b></p>
+                <pre>${JSON.stringify(data.correlationMatrix, null, 2)}</pre>
+            `;
+        });
+    </script>
+</body>
+</html>
